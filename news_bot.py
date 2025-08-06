@@ -56,7 +56,7 @@ class NewsBot:
     
     def get_job_news(self, count=5):
         """채용 뉴스 가져오기"""
-        return self.get_google_news_rss('개발자 채용 구인', count)
+        return self.get_google_news_rss('채용 구인', count)
     
     def create_message(self, all_news):
         """슬랙 메시지 생성"""

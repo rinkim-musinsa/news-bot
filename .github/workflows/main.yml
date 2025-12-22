@@ -1,10 +1,8 @@
 name: News Bot
-
 on:
   schedule:
-  - cron: '35 0 * * 1-5'  # UTC 00:35
-  workflow_dispatch:  # 수동 실행 가능
-
+  - cron: '35 23 * * 0-4'  # 기존보다 1시간 일찍
+  workflow_dispatch:
 jobs:
   run-news-bot:
     runs-on: ubuntu-latest

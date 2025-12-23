@@ -5,7 +5,7 @@ from slack_sdk import WebClient
 import ssl
 import certifi
 import time
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import urllib.parse
 
 # SSL 설정
@@ -14,6 +14,9 @@ ssl_context = ssl.create_default_context(cafile=certifi.where())
 # 설정값들 - 환경변수에서 가져오기
 SLACK_TOKEN = os.getenv('SLACK_TOKEN')
 CHANNEL = os.getenv('SLACK_CHANNEL', '#all-ta-re_news')
+
+# 한국 시간대 설정
+KST = timezone(timedelta(hours=9))
 
 # 디버깅: 환경변수 확인
 print("=== 환경변수 디버깅 ===")
@@ -60,7 +63,9 @@ class NewsBot:
     
     def create_message(self, all_news):
         """슬랙 메시지 생성"""
-        message = f"📰 *IT 뉴스 브리핑* - {datetime.now().strftime('%m/%d')}\n\n"
+        # 한국 시간으로 날짜 가져오기
+        kst_now = datetime.now(KST)
+        message = f"📰 *IT 뉴스 브리핑* - {kst_now.strftime('%m/%d')}\n\n"
         
         # 회사별 뉴스
         for company in self.companies:

@@ -91,7 +91,9 @@ class NewsBot:
             response = self.slack_client.chat_postMessage(
                 channel=CHANNEL,
                 text=message,
-                mrkdwn=True
+                mrkdwn=True,
+                unfurl_links=False,  
+                unfurl_media=False  
             )
             return response["ok"]
         except Exception as e:
